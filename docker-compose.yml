@@ -18,6 +18,8 @@ services:
   api:
     build:
       context: .
+    networks:
+      - docker-network
 
 networks:
   docker-network:
