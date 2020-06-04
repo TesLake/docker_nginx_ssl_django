@@ -8,4 +8,6 @@ COPY ./init-letsencrypt.sh .
 
 RUN chmod +x ./init-letsencrypt.sh
 
-CMD [ "./init-letsencrypt.sh" ]
+RUN ./init-letsencrypt.sh
+
+RUN rc-service nginx restart
