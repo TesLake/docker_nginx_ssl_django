@@ -1,11 +1,11 @@
 FROM nginx:alpine
 
+WORKDIR /app
+
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 
-RUN mkdir /app
+COPY ./init-letsencrypt.sh .
 
-COPY ./init-letsencrypt.sh /app
+RUN chmod +x ./init-letsencrypt.sh
 
-RUN chmod +x /app/init-letsencrypt.sh
-
-RUN /app/init-letsencrypt.sh
+RUN ./init-letsencrypt.sh
