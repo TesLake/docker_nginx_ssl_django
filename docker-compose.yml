@@ -10,15 +10,15 @@ services:
       - 443:443
     depends_on:
       - api
-      - certbot
     volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - /docker-volumes/etc/letsencrypt/live/safegymapp.xyz/fullchain.pem:/etc/letsencrypt/live/safegymapp.xyz/fullchain.pem
+      - /docker-volumes/etc/letsencrypt/live/safegymapp.xyz/privkey.pem:/etc/letsencrypt/live/safegymapp.xyz/privkey.pem
+    networks:
+      - docker-network
   api:
     build:
       context: .
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+
+networks:
+  docker-network:
+    driver: bridge
